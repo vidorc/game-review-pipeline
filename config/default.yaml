@@ -15,3 +15,10 @@ captions:
   language: null
   word_timestamps: true
   output_format: "srt"
+
+watcher:
+  watch_folder: ""
+  allowed_extensions: [".mp4", ".mkv"]
+  voice_extension: ".wav"
+  auto_run: false
+  output_base_dir: "./output"

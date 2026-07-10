@@ -1,0 +1,8 @@
+# Game Review Pipeline - Voice Cleaning Macro
+# Import this into Audacity (Tools → Macros → Import)
+# Then apply it to your raw voiceover track.
+
+NoiseReduction:Use_Preset="<None>" Attack_Time="0.00" Release_Time="0.10" Noise_Reduction_dB="12" Sensitivity="6.00" Frequency_Smoothing_bands="3" Noise="Reduction" Gain="0"
+Compressor:Threshold="-24" Noise_Floor="-40" Ratio="2:1" Attack_Time="0.20" Release_Time="1.0" Normalize_to_0dB="0" Use_Preset="<None>"
+Normalize:PeakLevel="-1.0" Remove_DC_Offset="1" Normalize_Stereo_Channels_Independently="0" Apply_Gain="1"
+ExportWav:Filename="" Path="" Use_Custom_Mix="0"

@@ -1,0 +1,78 @@
+{
+  "scene_collection_name": "Game Review Pipeline",
+  "scenes": [
+    {
+      "name": "Main 16:9",
+      "sources": [
+        {
+          "name": "Game Capture",
+          "type": "game_capture",
+          "settings": {
+            "capture_mode": "any_fullscreen",
+            "window": "any",
+            "priority": 1,
+            "allow_transparency": false
+          },
+          "transform": {
+            "pos": {"x": 0, "y": 0},
+            "size": {"x": 3840, "y": 2160}
+          }
+        },
+        {
+          "name": "Webcam",
+          "type": "video_capture_device",
+          "settings": {
+            "device": "default",
+            "resolution_type": "custom",
+            "res": {"x": 640, "y": 360}
+          },
+          "transform": {
+            "pos": {"x": 3200, "y": 1800},
+            "size": {"x": 640, "y": 360}
+          }
+        }
+      ]
+    },
+    {
+      "name": "Vertical 9:16",
+      "sources": [
+        {
+          "name": "Game Capture (Cropped)",
+          "type": "game_capture",
+          "settings": {
+            "capture_mode": "any_fullscreen",
+            "window": "any",
+            "priority": 1,
+            "allow_transparency": false
+          },
+          "transform": {
+            "pos": {"x": 0, "y": 0},
+            "size": {"x": 1080, "y": 1920},
+            "crop": {"left": 1920, "right": 1920, "top": 0, "bottom": 0}
+          }
+        },
+        {
+          "name": "Webcam Overlay",
+          "type": "video_capture_device",
+          "settings": {
+            "device": "default",
+            "resolution_type": "custom",
+            "res": {"x": 480, "y": 270}
+          },
+          "transform": {
+            "pos": {"x": 0, "y": 1600},
+            "size": {"x": 480, "y": 270}
+          }
+        }
+      ]
+    }
+  ],
+  "outputs": {
+    "recording": {
+      "encoder": "nvenc_h264",
+      "quality": "hq",
+      "format": "mp4",
+      "path": ""
+    }
+  }
+}
