@@ -17,6 +17,12 @@ dependencies = [
     "watchdog>=4.0",
 ]
 
+[project.optional-dependencies]
+openai = ["openai>=1.0"]
+gemini = ["google-generativeai"]
+claude = ["anthropic"]
+ollama = ["requests"]
+
 [project.scripts]
 pipeline = "automation.cli:app"
 
