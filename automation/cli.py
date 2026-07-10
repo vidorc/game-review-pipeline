@@ -2,7 +2,7 @@ import typer
 from pathlib import Path
 from automation.folder_setup import create_project_structure
 from automation.audio import clean_audio
-from automation.captions import generate_captions
+# Heavy imports (whisper, LLM libs) are done inside commands to avoid crashing the CLI
 
 app = typer.Typer(help="Game Review Pipeline - Pre-editing automation")
 
@@ -15,6 +15,8 @@ def run(
     """
     Full pre‑edit pipeline: folder structure, audio cleaning, captions.
     """
+    from automation.captions import generate_captions
+
     typer.echo("Running full pipeline...")
     create_project_structure(output_dir)
     typer.echo("✓ Project structure created.")
@@ -50,6 +52,7 @@ def captions(
     config_path: str = typer.Option(None, help="Path to config YAML"),
 ):
     """Generate word-level captions (SRT) from an audio file."""
+    from automation.captions import generate_captions
     generate_captions(audio, output_dir, config_path)
 
 @app.command()
@@ -97,6 +100,17 @@ def metadata(
     typer.echo(f"  Title: {result['title']}")
     typer.echo(f"  Description: {result['description']}")
     typer.echo(f"  Hashtags: {result['hashtags']}")
+
+@app.command()
+def watch(
+    config_path: str = typer.Option(None, help="Path to config YAML (must include watcher section)"),
+):
+    """
+    Watch a folder for new recordings and automatically run the pipeline.
+    """
+    from automation.watcher import start_watcher
+    typer.echo("Starting folder watcher...")
+    start_watcher(config_path)
 
 if __name__ == "__main__":
     app()
