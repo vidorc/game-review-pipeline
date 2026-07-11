@@ -19,18 +19,18 @@ def run(
 
     typer.echo("Running full pipeline...")
     create_project_structure(output_dir)
-    typer.echo("✓ Project structure created.")
+    typer.echo("[SUCCESS] Project structure created.")
     
     voice_clean = str(Path(output_dir) / "Voice" / "voice_clean.wav")
     success = clean_audio(voice, voice_clean, config_path)
     if not success:
         typer.echo("Audio cleaning failed. Aborting.")
         raise typer.Exit(code=1)
-    typer.echo("✓ Audio cleaned.")
+    typer.echo("[SUCCESS] Audio cleaned.")
     
     captions_dir = str(Path(output_dir) / "Voice")
     generate_captions(voice_clean, captions_dir, config_path)
-    typer.echo("✓ Captions generated.")
+    typer.echo("[SUCCESS] Captions generated.")
     
     typer.echo(f"\nAll done! Check {output_dir} for results.")
 
@@ -62,7 +62,7 @@ def folder(
 ):
     """Create the standard project folder structure."""
     create_project_structure(output_dir, config_path)
-    typer.echo(f"✓ Folder structure created in {output_dir}")
+    typer.echo(f"[SUCCESS] Folder structure created in {output_dir}")
 
 @app.command()
 def metadata(
@@ -96,7 +96,7 @@ def metadata(
     with open(output, "w") as f:
         json.dump(result, f, indent=2)
 
-    typer.echo(f"✓ Metadata saved to {output}")
+    typer.echo(f"[SUCCESS] Metadata saved to {output}")
     typer.echo(f"  Title: {result['title']}")
     typer.echo(f"  Description: {result['description']}")
     typer.echo(f"  Hashtags: {result['hashtags']}")
